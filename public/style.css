@@ -1,0 +1,85 @@
+body{
+    background-color: lightblue;
+    font-family: Arial, sans-serif;}
+main{
+    width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+header{
+    background-color: whitesmoke;
+    text-align: center;
+}
+nav{
+    background-color: lightgrey;
+    text-align: center;
+    padding: 10px;
+}
+nav a{
+    text-decoration: none;
+    margin: 20px;
+    font-size: 20px;
+    color: black;
+}
+nav a:hover{
+    color: blue;
+    text-decoration: underline;
+}
+section{
+    background-color: white;
+    min-height: 400px;
+    padding: 20px;
+}
+footer{
+    text-align: center;
+    background-color: lightgrey;
+    padding: 10px;
+    font-size: 12px;
+    
+}
+nauczyciele{
+    font-weight: bold;
+    color: darkblue;
+    font-size: 18px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    text-align: left;
+    padding-left: 10px;
+    background-color: lightgrey;
+}
+osiagniecia{
+    font-weight: bold;
+    color: darkblue;
+    font-size: 18px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    text-align: left;
+    padding-left: 10px;
+    background-color: red;
+}
+plan_lekcji{
+    font-weight: bold;
+    color: darkblue;
+    font-size: 18px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    text-align: left;
+    padding-left: 10px;
+    background-color: lightgrey;
+}
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
