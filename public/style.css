@@ -1,85 +1,152 @@
-body{
-    background-color: lightblue;
-    font-family: Arial, sans-serif;}
-main{
-    width: 1000px;
-    margin-left: auto;
-    margin-right: auto;
+/* RESET + sanity */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
 }
 
-header{
-    background-color: whitesmoke;
-    text-align: center;
+body {
+    margin: 0;
+    background-color: #36393f;
+    color: white;
+    font-family: Arial, sans-serif;
 }
-nav{
-    background-color: lightgrey;
-    text-align: center;
-    padding: 10px;
-}
-nav a{
-    text-decoration: none;
-    margin: 20px;
-    font-size: 20px;
-    color: black;
-}
-nav a:hover{
-    color: blue;
-    text-decoration: underline;
-}
-section{
-    background-color: white;
-    min-height: 400px;
+
+/* LAYOUT */
+main {
+    max-width: 1000px;
+    margin: 0 auto;
     padding: 20px;
 }
-footer{
-    text-align: center;
-    background-color: lightgrey;
-    padding: 10px;
-    font-size: 12px;
-    
-}
-nauczyciele{
-    font-weight: bold;
-    color: darkblue;
-    font-size: 18px;
-    margin-top: 20px;
-    margin-bottom: 10px;
-    text-align: left;
-    padding-left: 10px;
-    background-color: lightgrey;
-}
-osiagniecia{
-    font-weight: bold;
-    color: darkblue;
-    font-size: 18px;
-    margin-top: 20px;
-    margin-bottom: 10px;
-    text-align: left;
-    padding-left: 10px;
-    background-color: red;
-}
-plan_lekcji{
-    font-weight: bold;
-    color: darkblue;
-    font-size: 18px;
-    margin-top: 20px;
-    margin-bottom: 10px;
-    text-align: left;
-    padding-left: 10px;
-    background-color: lightgrey;
-}
-table {
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
+
+/* HEADER / NAV / FOOTER */
+header,
+nav,
+footer {
+    background-color: #2f3136;
+    color: white;
 }
 
-td, th {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 8px;
+header {
+    text-align: center;
+    padding: 20px;
+}
+
+nav {
+    text-align: center;
+    padding: 10px;
+}
+
+nav a {
+    text-decoration: none;
+    margin: 0 20px;
+    font-size: 20px;
+    color: #00aff4;
+    transition: color 0.2s ease;
+}
+
+nav a:hover {
+    color: #7289da;
+    text-decoration: underline;
+}
+
+footer {
+    text-align: center;
+    padding: 10px;
+    font-size: 12px;
+    opacity: 0.8;
+}
+
+/* CONTENT */
+section {
+    background-color: #36393f;
+    min-height: 400px;
+    padding: 20px;
+    color: white;
+}
+
+/* SEKCJE SPECJALNE */
+.nauczyciele,
+.osiagniecia,
+.plan_lekcji {
+    font-weight: bold;
+    color: #00aff4;
+    font-size: 18px;
+    margin: 20px 0 10px;
+    padding: 10px;
+    background-color: #2f3136;
+}
+
+/* TABELE */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+td,
+th {
+    border: 1px solid #7289da;
+    text-align: left;
+    padding: 8px;
 }
 
 tr:nth-child(even) {
-  background-color: #dddddd;
+    background-color: #2f3136;
+}
+
+/* 404 CANVAS */
+#errorCanvas {
+    display: block;
+    margin: 20px auto;
+    max-width: 100%;
+}
+
+/* LINKI OGÓLNE */
+a {
+    color: #00aff4;
+    transition: color 0.2s ease;
+}
+
+a:hover {
+    color: #7289da;
+}
+
+/* RESPONSYWNOŚĆ */
+@media (max-width: 600px) {
+    nav a {
+        display: block;
+        margin: 10px 0;
+    }
+
+    main {
+        padding: 10px;
+    }
+}
+/* Podstawowy wygląd przycisków w menu */
+nav input[type="button"] {
+    background: linear-gradient(135deg, #3498db, #2980b9); /* gradient od niebieskiego do ciemnego */
+    color: white; /* tekst na biało */
+    border: none; /* bez ramki */
+    padding: 10px 20px; /* rozmiar przycisku */
+    font-size: 16px;
+    border-radius: 8px; /* lekko zaokrąglone rogi */
+    cursor: pointer; /* ręka przy hover */
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3); /* lekki cień */
+    transition: all 0.2s ease; /* płynne zmiany */
+    margin: 5px; /* odstępy między przyciskami */
+}
+
+/* Efekt hover */
+nav input[type="button"]:hover {
+    background: linear-gradient(135deg, #5dade2, #2c80b4); /* jaśniejszy gradient */
+    transform: translateY(-2px); /* uniesienie przy hover */
+    box-shadow: 0 6px 8px rgba(0,0,0,0.4);
+}
+
+/* Efekt kliknięcia */
+nav input[type="button"]:active {
+    transform: translateY(2px); /* wciskanie przycisku */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }

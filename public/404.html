@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 – Strona nie znaleziona</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<main>
+    <header>
+        <h1>404 – tu nic nie ma</h1>
+    </header>
+
+    <section>
+        <p style="text-align: center; font-family: comic sans ms;">Zabłądziłeś. Ta strona nie istnieje i nawet robot jej nie znalazł.</p>
+
+        <canvas id="errorCanvas" width="300" height="300"></canvas>
+
+        <input type="button" value="Powrót do strony głównej" onclick="window.location.href='index.html'" style="display: block; margin: 20px auto; padding: 10px 20px; font-size: 16px; cursor: pointer;">
+    </section>
+</main>
+
+<footer>
+    <p>© 2026 Bartłomiej Sokulski<br>Wszelkie prawa zastrzeżone</p>
+</footer>
+
+<script>
+const canvas = document.getElementById("errorCanvas");
+const ctx = canvas.getContext("2d");
+
+canvas.width = 400;
+canvas.height = 400;
+
+let mouseX = 0;
+let mouseY = 0;
+
+let blink = false;
+let blinkTimer = 0;
+let nextBlink = randBlink();
+let forcedBlink = 0;
+let time = 0;
+
+function randBlink() {
+    return Math.random() * 180 + 120;
+}
+
+canvas.addEventListener("mousemove", e => {
+    const rect = canvas.getBoundingClientRect();
+    mouseX = e.clientX - rect.left;
+    mouseY = e.clientY - rect.top;
+});
+
+canvas.addEventListener("click", () => {
+    forcedBlink = 105; // mrużenie po kliknięciu
+});
+
+function clamp(v, min, max) {
+    return Math.max(min, Math.min(max, v));
+}
+
+function drawRobot() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    time += 0.03;
+
+    const cx = canvas.width / 2;
+    const cy = canvas.height / 2 + Math.sin(time) * 6;
+
+    // wektor patrzenia
+    const lookX = clamp((mouseX - cx) / 40, -1, 1);
+    const lookY = clamp((mouseY - (cy - 90)) / 40, -1, 1);
+
+    ctx.save();
+    ctx.translate(cx, cy);
+
+    // === CIAŁO ===
+    ctx.fillStyle = "#e6e6e6";
+    ctx.beginPath();
+    ctx.ellipse(0, 0, 95, 80, 0, 0, Math.PI * 2);
+    ctx.fill();
+
+    // === GŁOWA ===
+    ctx.beginPath();
+    ctx.ellipse(0, -110, 80, 60, 0, 0, Math.PI * 2);
+    ctx.fill();
+
+    // === WIZJER ===
+    ctx.fillStyle = "#0b3c4d";
+    ctx.beginPath();
+    ctx.ellipse(0, -110, 55, 32, 0, 0, Math.PI * 2);
+    ctx.fill();
+
+    // === OCZY ===
+    ctx.strokeStyle = "#00eaff";
+    ctx.fillStyle = "#00eaff";
+    ctx.lineWidth = 4;
+
+    const eyeX = 18;
+    const eyeY = -110;
+
+    const eyesClosed = blink || forcedBlink > 0;
+
+    if (!eyesClosed) {
+        ctx.beginPath();
+        ctx.arc(-eyeX + lookX * 6, eyeY + lookY * 6, 7, 0, Math.PI * 2);
+        ctx.arc( eyeX + lookX * 6, eyeY + lookY * 6, 7, 0, Math.PI * 2);
+        ctx.fill();
+        
+    } else {
+        ctx.beginPath();
+        ctx.moveTo(-eyeX - 10, eyeY);
+        ctx.lineTo(-eyeX + 10, eyeY);
+        ctx.moveTo( eyeX - 10, eyeY);
+        ctx.lineTo( eyeX + 10, eyeY);
+        ctx.stroke();
+    }
+
+    // === PANEL ===
+    ctx.fillStyle = "#00eaff";
+    ctx.beginPath();
+    ctx.ellipse(0, 20, 26, 20, 0, 0, Math.PI * 2);
+    ctx.fill();
+
+    // === RĘCE (NATURALNY RUCH) ===
+    const armSwing = Math.sin(time * 1.5) * 0.6;
+
+    ctx.fillStyle = "#d9d9d9";
+    ctx.beginPath();
+    ctx.ellipse(-100, -20, 22, 14, armSwing, 0, Math.PI * 2);
+    ctx.ellipse( 100, -20, 22, 14, -armSwing, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.restore();
+
+    // === MRUGANIE ===
+    blinkTimer++;
+    if (blinkTimer > nextBlink) blink = true;
+    if (blinkTimer > nextBlink + 8) {
+        blink = false;
+        blinkTimer = 0;
+        nextBlink = randBlink();
+    }
+
+    if (forcedBlink > 0) forcedBlink--;
+
+    requestAnimationFrame(drawRobot);
+}
+
+drawRobot();
+</script>
+
+
+</body>
+</html>
